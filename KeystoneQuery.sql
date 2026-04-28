@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Statuses;
 DROP TABLE IF EXISTS Priorities;
 DROP TABLE IF EXISTS Roles;
+DROP TABLE IF EXISTS Texts;
 
 GO
 
@@ -77,6 +78,13 @@ CREATE TABLE Tasks (
 	TaskProjectID INT FOREIGN KEY REFERENCES Projects(ProjectID) NOT NULL
 );
 
+CREATE TABLE Texts (
+	TextID INT PRIMARY KEY IDENTITY(1,1),
+	UserID INT NOT NULL FOREIGN KEY REFERENCES Users(UserID),
+	TextBody VARCHAR(500) NOT NULL,
+	DateSent DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 GO
 
 INSERT INTO Roles (RoleName, RoleDesc, RolePermCreate, RolePermEdit, RolePermDelete, RolePermInvite, RolePermEditRoles) VALUES
@@ -121,4 +129,10 @@ INSERT INTO Tasks (TaskName, TaskDesc, TaskPriority, TaskStatus, TaskTimestamp, 
 ('Write Script', 'Prepare speaking notes for presentation', 1, 1, CURRENT_TIMESTAMP, '2026-04-18 17:00:00', 1),
 ('Review Content', 'Final review before submission', 3, 3, CURRENT_TIMESTAMP, '2026-04-19 09:00:00', 1),
 ('Design Homepage', 'Create new homepage layout', 2, 2, CURRENT_TIMESTAMP, '2026-05-01 12:00:00', 2);
+
+INSERT INTO Texts (UserID, TextBody, DateSent) VALUES
+(1, 'Hey tema, I have started the project setup.', '2026-04-28 14:00:00'),
+(2, 'I am working on the frontend layout now.', '2026-04-28 14:05:00'),
+(1, 'Please make sure your tasks are updated by tonight.', '2026-04-28 14:10:00');
+
 GO
