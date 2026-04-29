@@ -31,5 +31,6 @@ namespace Project_Keystone.Models
         public virtual Role Role { get; set; } = null!;
         public virtual ICollection<Project> OwnedProjects { get; set; } = new List<Project>();
         public virtual ICollection<UserSkill> UserSkills { get; set; } = new List<UserSkill>();
+        public virtual ICollection<Text> Texts { get; set; } = new List<Text>();
     }
 }
